@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="UsersEditDlg" widgetVar="UsersEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle2.EditUsersTitle}">
+            <h:form id="UsersEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{usersController.selected != null}">
+                        <p:outputLabel value="#{bundle2.EditUsersLabel_userName}" for="userName" />
+                        <p:inputText id="userName" value="#{usersController.selected.userName}" title="#{bundle2.EditUsersTitle_userName}" required="true" requiredMessage="#{bundle2.EditUsersRequiredMessage_userName}"/>
+                        <p:outputLabel value="#{bundle2.EditUsersLabel_fullName}" for="fullName" />
+                        <p:inputText id="fullName" value="#{usersController.selected.fullName}" title="#{bundle2.EditUsersTitle_fullName}" />
+                        <p:outputLabel value="#{bundle2.EditUsersLabel_emailAddress}" for="emailAddress" />
+                        <p:inputText id="emailAddress" value="#{usersController.selected.emailAddress}" title="#{bundle2.EditUsersTitle_emailAddress}" />
+                        <p:outputLabel value="#{bundle2.EditUsersLabel_userPassword}" for="userPassword" />
+                        <p:inputText id="userPassword" value="#{usersController.selected.userPassword}" title="#{bundle2.EditUsersTitle_userPassword}" />
+                        <p:outputLabel value="#{bundle2.EditUsersLabel_jobRole}" for="jobRole" />
+                        <p:inputText id="jobRole" value="#{usersController.selected.jobRole}" title="#{bundle2.EditUsersTitle_jobRole}" />
+                        <p:outputLabel value="#{bundle2.EditUsersLabel_phoneNumber}" for="phoneNumber" />
+                        <p:inputText id="phoneNumber" value="#{usersController.selected.phoneNumber}" title="#{bundle2.EditUsersTitle_phoneNumber}" />
+                        <p:outputLabel value="#{bundle2.EditUsersLabel_enabled}" for="enabled" />
+                        <p:selectBooleanCheckbox id="enabled" value="#{usersController.selected.enabled}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{usersController.update}" value="#{bundle2.Save}" update="display,:UsersListForm:datalist,:growl" oncomplete="handleSubmit(args, 'UsersEditDialog');"/>
+                    <p:commandButton value="#{bundle2.Cancel}" onclick="UsersEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

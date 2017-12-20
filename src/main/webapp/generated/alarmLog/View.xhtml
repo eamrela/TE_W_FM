@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AlarmLogViewDlg" widgetVar="AlarmLogViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle2.ViewAlarmLogTitle}">
+            <h:form id="AlarmLogViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{alarmLogController.selected != null}">
+                        <h:outputText value="#{bundle2.ViewAlarmLogLabel_alarmId}"/>
+                        <h:outputText value="#{alarmLogController.selected.alarmId}" title="#{bundle2.ViewAlarmLogTitle_alarmId}"/>
+                        <h:outputText value="#{bundle2.ViewAlarmLogLabel_recordId}"/>
+                        <h:outputText value="#{alarmLogController.selected.recordId}" title="#{bundle2.ViewAlarmLogTitle_recordId}"/>
+                        <h:outputText value="#{bundle2.ViewAlarmLogLabel_acknowledged}"/>
+                        <p:selectBooleanCheckbox value="#{alarmLogController.selected.acknowledged}" disabled="true"/>
+                        <h:outputText value="#{bundle2.ViewAlarmLogLabel_additionalText}"/>
+                        <h:outputText value="#{alarmLogController.selected.additionalText}" title="#{bundle2.ViewAlarmLogTitle_additionalText}"/>
+                        <h:outputText value="#{bundle2.ViewAlarmLogLabel_alarmType}"/>
+                        <h:outputText value="#{alarmLogController.selected.alarmType}" title="#{bundle2.ViewAlarmLogTitle_alarmType}"/>
+                        <h:outputText value="#{bundle2.ViewAlarmLogLabel_alarmDomain}"/>
+                        <h:outputText value="#{alarmLogController.selected.alarmDomain}" title="#{bundle2.ViewAlarmLogTitle_alarmDomain}"/>
+                        <h:outputText value="#{bundle2.ViewAlarmLogLabel_managedObject}"/>
+                        <h:outputText value="#{alarmLogController.selected.managedObject}" title="#{bundle2.ViewAlarmLogTitle_managedObject}"/>
+                        <h:outputText value="#{bundle2.ViewAlarmLogLabel_alarmNode}"/>
+                        <h:outputText value="#{alarmLogController.selected.alarmNode}" title="#{bundle2.ViewAlarmLogTitle_alarmNode}"/>
+                        <h:outputText value="#{bundle2.ViewAlarmLogLabel_alarmSeverity}"/>
+                        <h:outputText value="#{alarmLogController.selected.alarmSeverity}" title="#{bundle2.ViewAlarmLogTitle_alarmSeverity}"/>
+                        <h:outputText value="#{bundle2.ViewAlarmLogLabel_specificProblem}"/>
+                        <h:outputText value="#{alarmLogController.selected.specificProblem}" title="#{bundle2.ViewAlarmLogTitle_specificProblem}"/>
+                        <h:outputText value="#{bundle2.ViewAlarmLogLabel_eventTime}"/>
+                        <h:outputText value="#{alarmLogController.selected.eventTime}" title="#{bundle2.ViewAlarmLogTitle_eventTime}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle2.ViewAlarmLogLabel_ceaseTime}"/>
+                        <h:outputText value="#{alarmLogController.selected.ceaseTime}" title="#{bundle2.ViewAlarmLogTitle_ceaseTime}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle2.ViewAlarmLogLabel_acknowledgeTime}"/>
+                        <h:outputText value="#{alarmLogController.selected.acknowledgeTime}" title="#{bundle2.ViewAlarmLogTitle_acknowledgeTime}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle2.ViewAlarmLogLabel_alarmComment}"/>
+                        <h:outputText value="#{alarmLogController.selected.alarmComment}" title="#{bundle2.ViewAlarmLogTitle_alarmComment}"/>
+                        <h:outputText value="#{bundle2.ViewAlarmLogLabel_serviceAffecting}"/>
+                        <p:selectBooleanCheckbox value="#{alarmLogController.selected.serviceAffecting}" disabled="true"/>
+                        <h:outputText value="#{bundle2.ViewAlarmLogLabel_probableCause}"/>
+                        <h:outputText value="#{alarmLogController.selected.probableCause}" title="#{bundle2.ViewAlarmLogTitle_probableCause}"/>
+                        <h:outputText value="#{bundle2.ViewAlarmLogLabel_loggingTime}"/>
+                        <h:outputText value="#{alarmLogController.selected.loggingTime}" title="#{bundle2.ViewAlarmLogTitle_loggingTime}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle2.ViewAlarmLogLabel_ttId}"/>
+                        <h:outputText value="#{alarmLogController.selected.ttId}" title="#{bundle2.ViewAlarmLogTitle_ttId}"/>
+                        <h:outputText value="#{bundle2.ViewAlarmLogLabel_alarmOc}"/>
+                        <h:outputText value="#{alarmLogController.selected.alarmOc}" title="#{bundle2.ViewAlarmLogTitle_alarmOc}"/>
+                        <h:outputText value="#{bundle2.ViewAlarmLogLabel_acknowledgedBy}"/>
+                        <h:outputText value="#{alarmLogController.selected.acknowledgedBy}" title="#{bundle2.ViewAlarmLogTitle_acknowledgedBy}"/>
+                        <h:outputText value="#{bundle2.ViewAlarmLogLabel_commentBy}"/>
+                        <h:outputText value="#{alarmLogController.selected.commentBy}" title="#{bundle2.ViewAlarmLogTitle_commentBy}"/>
+                        <h:outputText value="#{bundle2.ViewAlarmLogLabel_ttBy}"/>
+                        <h:outputText value="#{alarmLogController.selected.ttBy}" title="#{bundle2.ViewAlarmLogTitle_ttBy}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle2.Close}" onclick="AlarmLogViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

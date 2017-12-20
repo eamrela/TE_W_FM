@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="NodesViewDlg" widgetVar="NodesViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle2.ViewNodesTitle}">
+            <h:form id="NodesViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{nodesController.selected != null}">
+                        <h:outputText value="#{bundle2.ViewNodesLabel_nodeName}"/>
+                        <h:outputText value="#{nodesController.selected.nodeName}" title="#{bundle2.ViewNodesTitle_nodeName}"/>
+                        <h:outputText value="#{bundle2.ViewNodesLabel_nodeLocation}"/>
+                        <h:outputText value="#{nodesController.selected.nodeLocation}" title="#{bundle2.ViewNodesTitle_nodeLocation}"/>
+                        <h:outputText value="#{bundle2.ViewNodesLabel_nodeStatus}"/>
+                        <p:selectBooleanCheckbox value="#{nodesController.selected.nodeStatus}" disabled="true"/>
+                        <h:outputText value="#{bundle2.ViewNodesLabel_nodeDomain}"/>
+                        <h:outputText value="#{nodesController.selected.nodeDomain}" title="#{bundle2.ViewNodesTitle_nodeDomain}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle2.Close}" onclick="NodesViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

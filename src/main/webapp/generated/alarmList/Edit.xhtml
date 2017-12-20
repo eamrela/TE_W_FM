@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AlarmListEditDlg" widgetVar="AlarmListEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle2.EditAlarmListTitle}">
+            <h:form id="AlarmListEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{alarmListController.selected != null}">
+                        <p:outputLabel value="#{bundle2.EditAlarmListLabel_alarmId}" for="alarmId" />
+                        <p:inputText id="alarmId" value="#{alarmListController.selected.alarmId}" title="#{bundle2.EditAlarmListTitle_alarmId}" />
+                        <p:outputLabel value="#{bundle2.EditAlarmListLabel_recordId}" for="recordId" />
+                        <p:inputText id="recordId" value="#{alarmListController.selected.recordId}" title="#{bundle2.EditAlarmListTitle_recordId}" required="true" requiredMessage="#{bundle2.EditAlarmListRequiredMessage_recordId}"/>
+                        <p:outputLabel value="#{bundle2.EditAlarmListLabel_acknowledged}" for="acknowledged" />
+                        <p:selectBooleanCheckbox id="acknowledged" value="#{alarmListController.selected.acknowledged}" />
+                        <p:outputLabel value="#{bundle2.EditAlarmListLabel_additionalText}" for="additionalText" />
+                        <p:inputText id="additionalText" value="#{alarmListController.selected.additionalText}" title="#{bundle2.EditAlarmListTitle_additionalText}" />
+                        <p:outputLabel value="#{bundle2.EditAlarmListLabel_alarmType}" for="alarmType" />
+                        <p:inputText id="alarmType" value="#{alarmListController.selected.alarmType}" title="#{bundle2.EditAlarmListTitle_alarmType}" />
+                        <p:outputLabel value="#{bundle2.EditAlarmListLabel_alarmDomain}" for="alarmDomain" />
+                        <p:inputText id="alarmDomain" value="#{alarmListController.selected.alarmDomain}" title="#{bundle2.EditAlarmListTitle_alarmDomain}" />
+                        <p:outputLabel value="#{bundle2.EditAlarmListLabel_managedObject}" for="managedObject" />
+                        <p:inputText id="managedObject" value="#{alarmListController.selected.managedObject}" title="#{bundle2.EditAlarmListTitle_managedObject}" />
+                        <p:outputLabel value="#{bundle2.EditAlarmListLabel_alarmNode}" for="alarmNode" />
+                        <p:inputText id="alarmNode" value="#{alarmListController.selected.alarmNode}" title="#{bundle2.EditAlarmListTitle_alarmNode}" />
+                        <p:outputLabel value="#{bundle2.EditAlarmListLabel_alarmSeverity}" for="alarmSeverity" />
+                        <p:inputText id="alarmSeverity" value="#{alarmListController.selected.alarmSeverity}" title="#{bundle2.EditAlarmListTitle_alarmSeverity}" />
+                        <p:outputLabel value="#{bundle2.EditAlarmListLabel_specificProblem}" for="specificProblem" />
+                        <p:inputText id="specificProblem" value="#{alarmListController.selected.specificProblem}" title="#{bundle2.EditAlarmListTitle_specificProblem}" />
+                        <p:outputLabel value="#{bundle2.EditAlarmListLabel_eventTime}" for="eventTime" />
+                        <p:calendar id="eventTime" pattern="MM/dd/yyyy HH:mm:ss" value="#{alarmListController.selected.eventTime}" title="#{bundle2.EditAlarmListTitle_eventTime}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle2.EditAlarmListLabel_ceaseTime}" for="ceaseTime" />
+                        <p:calendar id="ceaseTime" pattern="MM/dd/yyyy HH:mm:ss" value="#{alarmListController.selected.ceaseTime}" title="#{bundle2.EditAlarmListTitle_ceaseTime}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle2.EditAlarmListLabel_acknowledgeTime}" for="acknowledgeTime" />
+                        <p:calendar id="acknowledgeTime" pattern="MM/dd/yyyy HH:mm:ss" value="#{alarmListController.selected.acknowledgeTime}" title="#{bundle2.EditAlarmListTitle_acknowledgeTime}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle2.EditAlarmListLabel_alarmComment}" for="alarmComment" />
+                        <p:inputText id="alarmComment" value="#{alarmListController.selected.alarmComment}" title="#{bundle2.EditAlarmListTitle_alarmComment}" />
+                        <p:outputLabel value="#{bundle2.EditAlarmListLabel_serviceAffecting}" for="serviceAffecting" />
+                        <p:selectBooleanCheckbox id="serviceAffecting" value="#{alarmListController.selected.serviceAffecting}" />
+                        <p:outputLabel value="#{bundle2.EditAlarmListLabel_probableCause}" for="probableCause" />
+                        <p:inputText id="probableCause" value="#{alarmListController.selected.probableCause}" title="#{bundle2.EditAlarmListTitle_probableCause}" />
+                        <p:outputLabel value="#{bundle2.EditAlarmListLabel_loggingTime}" for="loggingTime" />
+                        <p:calendar id="loggingTime" pattern="MM/dd/yyyy HH:mm:ss" value="#{alarmListController.selected.loggingTime}" title="#{bundle2.EditAlarmListTitle_loggingTime}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle2.EditAlarmListLabel_ttId}" for="ttId" />
+                        <p:inputText id="ttId" value="#{alarmListController.selected.ttId}" title="#{bundle2.EditAlarmListTitle_ttId}" />
+                        <p:outputLabel value="#{bundle2.EditAlarmListLabel_alarmOc}" for="alarmOc" />
+                        <p:selectOneMenu id="alarmOc" value="#{alarmListController.selected.alarmOc}" >
+                            <f:selectItem itemLabel="#{bundle2.SelectOneMessage}"/>
+                            <f:selectItems value="#{operationalContextController.itemsAvailableSelectOne}"
+                                           var="alarmOcItem"
+                                           itemValue="#{alarmOcItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle2.EditAlarmListLabel_acknowledgedBy}" for="acknowledgedBy" />
+                        <p:selectOneMenu id="acknowledgedBy" value="#{alarmListController.selected.acknowledgedBy}" >
+                            <f:selectItem itemLabel="#{bundle2.SelectOneMessage}"/>
+                            <f:selectItems value="#{usersController.itemsAvailableSelectOne}"
+                                           var="acknowledgedByItem"
+                                           itemValue="#{acknowledgedByItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle2.EditAlarmListLabel_commentBy}" for="commentBy" />
+                        <p:selectOneMenu id="commentBy" value="#{alarmListController.selected.commentBy}" >
+                            <f:selectItem itemLabel="#{bundle2.SelectOneMessage}"/>
+                            <f:selectItems value="#{usersController.itemsAvailableSelectOne}"
+                                           var="commentByItem"
+                                           itemValue="#{commentByItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle2.EditAlarmListLabel_ttBy}" for="ttBy" />
+                        <p:selectOneMenu id="ttBy" value="#{alarmListController.selected.ttBy}" >
+                            <f:selectItem itemLabel="#{bundle2.SelectOneMessage}"/>
+                            <f:selectItems value="#{usersController.itemsAvailableSelectOne}"
+                                           var="ttByItem"
+                                           itemValue="#{ttByItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{alarmListController.update}" value="#{bundle2.Save}" update="display,:AlarmListListForm:datalist,:growl" oncomplete="handleSubmit(args, 'AlarmListEditDialog');"/>
+                    <p:commandButton value="#{bundle2.Cancel}" onclick="AlarmListEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

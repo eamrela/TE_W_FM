@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DomainsCreateDlg" widgetVar="DomainsCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle2.CreateDomainsTitle}">
+            <h:form id="DomainsCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{domainsController.selected != null}">
+                        <p:outputLabel value="#{bundle2.CreateDomainsLabel_domainName}" for="domainName" />
+                        <p:inputText id="domainName" value="#{domainsController.selected.domainName}" title="#{bundle2.CreateDomainsTitle_domainName}" required="true" requiredMessage="#{bundle2.CreateDomainsRequiredMessage_domainName}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{domainsController.create}" value="#{bundle2.Save}" update="display,:DomainsListForm:datalist,:growl" oncomplete="handleSubmit(args,'DomainsCreateDialog');"/>
+                    <p:commandButton value="#{bundle2.Cancel}" onclick="DomainsCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

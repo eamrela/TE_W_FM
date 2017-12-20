@@ -1,0 +1,190 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition>
+        
+        <p:dialog id="openTTDlgId" modal="true" widgetVar="openTTDlg" closeOnEscape="true" resizable="false" height="400" width="850" appendTo="@(body)" header="Open TT">
+            <h:form id="openTTForm">
+
+                <h:panelGroup rendered="#{alarmListController.selectedItems!=null}">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <p:dataTable var="relatedAlarm" 
+                                         value="#{alarmListController.troubleTicketsIntegrator.selectecdAlarms}"
+                                         paginator="true"
+                                         paginatorPosition="bottom"
+                                         rows="6"
+                                         rowKey="#{relatedAlarm.recordId}">
+                                <p:column headerText="Id" style="font-size: 9px;">
+                                    <h:outputText value="#{relatedAlarm.alarmId}" />
+                                </p:column>
+                                <p:column headerText="SP" style="font-size: 9px;">
+                                    <h:outputText value="#{relatedAlarm.specificProblem}" />
+                                </p:column>]
+                                <p:column headerText="Event Time" style="font-size: 9px;">
+                                    <h:outputText value="#{relatedAlarm.eventTime}">
+                                        <f:convertDateTime pattern="yyyy-MM-dd HH:mm:ss"/>
+                                    </h:outputText>
+                                </p:column>
+                                <p:column headerText="Cease Time" style="font-size: 9px;">
+                                    <h:outputText value="#{relatedAlarm.ceaseTime}">
+                                        <f:convertDateTime pattern="yyyy-MM-dd HH:mm:ss"/>
+                                    </h:outputText>
+                                </p:column>
+                            </p:dataTable>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label" for="imTitle">Title:</label>
+                            <h:inputText class="form-control" 
+                                         required="true" 
+                                         requiredMessage="Title can't be empty" 
+                                         value="#{alarmListController.troubleTicketsIntegrator.selected.ttTitle}"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label" for="imDescription">Description:</label>
+                            <h:inputText id="imDescription" 
+                                         required="true" 
+                                         requiredMessage="Description can't be empty" 
+                                         class="form-control" 
+                                         value="#{alarmListController.troubleTicketsIntegrator.selected.ttDescription}"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 col-sm-4 col-xs-4">
+                           <label class="control-label" for="imDomain">Domain:</label> 
+                           <h:selectOneMenu id="imDomain"
+                                            value="#{alarmListController.troubleTicketsIntegrator.selected.ttDomain}"
+                                             styleClass="form-control"
+                                             required="true"
+                                             requiredMessage="Domain can't be empty">
+                                <f:selectItem itemLabel="" itemValue="#{null}"/>
+                                <f:selectItems value="#{domainsTTController.itemsAvailableSelectOne}" 
+                                               var="domainItem"
+                                               itemValue="#{domainItem}"
+                                               itemLabel="#{domainItem}"/>
+                            </h:selectOneMenu>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-4">
+                           <label class="control-label" for="imCategory">Category:</label> 
+                           <h:selectOneMenu id="imCategory"
+                                             value="#{alarmListController.troubleTicketsIntegrator.selected.ttCategory}"
+                                             styleClass="form-control"
+                                             required="true"
+                                             requiredMessage="Category can't be empty">
+                                <p:ajax update=":openTTForm:imSubCategory,:activeAlarmsForm:growl" />
+                                <f:selectItem itemLabel="" itemValue="#{null}"/>
+                                <f:selectItems value="#{categoriesController.itemsAvailableSelectOne}" 
+                                               var="catergoryItem"
+                                               itemValue="#{catergoryItem}"
+                                               itemLabel="#{catergoryItem.categoryName}"/>
+                            </h:selectOneMenu>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-4">
+                           <label class="control-label" for="imSubCategory">Sub-category:</label> 
+                           <h:selectOneMenu id="imSubCategory"
+                                             value="#{alarmListController.troubleTicketsIntegrator.selected.ttSubcategory}"
+                                             styleClass="form-control"
+                                             required="true"
+                                             requiredMessage="SubCategory can't be empty">
+                                <f:selectItem itemLabel="" itemValue="#{null}"/>
+                                <f:selectItems value="#{alarmListController.troubleTicketsIntegrator.selected.ttCategory.subCategoriesCollection}" 
+                                               var="subcatergoryItem"
+                                               itemValue="#{subcatergoryItem.subCategoriesPK.subCategoryName}"
+                                               itemLabel="#{subcatergoryItem.subCategoriesPK.subCategoryName}"/>
+                            </h:selectOneMenu>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 col-sm-4 col-xs-4">
+                            <label class="control-label" for="imPriority">Priority</label>
+                            <h:selectOneMenu id="imPriority"
+                                             value="#{alarmListController.troubleTicketsIntegrator.selected.ttPriority}"
+                                             styleClass="form-control"
+                                             required="true"
+                                             requiredMessage="Priority can't be empty">
+                                <f:selectItem itemLabel="" itemValue="#{null}"/>
+                                <f:selectItems value="#{troubleTicketPriorityController.itemsAvailableSelectOne}" 
+                                               var="priorityItem"
+                                               itemValue="#{priorityItem}"
+                                               itemLabel="#{priorityItem.priorityName}"/>
+                            </h:selectOneMenu>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-4">
+                            <label class="control-label" for="imArea">Area</label>
+                            <h:selectOneMenu id="imArea"
+                                                 value="#{alarmListController.troubleTicketsIntegrator.selected.area}"
+                                             styleClass="form-control">
+                                <f:selectItem itemLabel="" itemValue="#{null}"/>
+                                <f:selectItems value="#{areasController.itemsAvailableSelectOne}" 
+                                               var="areaItem"
+                                               itemValue="#{areaItem}"
+                                               itemLabel="#{areaItem.areaName}"/>
+                            </h:selectOneMenu>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-4">
+                            <label class="control-label" for="imMajorIncident">Major Incident</label>
+                                 <h:selectOneMenu id="imMajorIncident"
+                                                  value="#{alarmListController.troubleTicketsIntegrator.selected.majorIncident}"
+                                             styleClass="form-control">
+                                <f:selectItem itemLabel="No" itemValue="#{false}"/>
+                                <f:selectItem itemLabel="Yes" itemValue="#{true}"/>
+                            </h:selectOneMenu>
+                        </div>
+                    </div>
+                    <br></br>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label" for="imEventTime">Event Time:</label>
+                            <p:calendar id="imEventTime" pattern="yyyy-MM-dd HH:mm:ss" value="#{alarmListController.troubleTicketsIntegrator.selected.eventTime}"/>
+                        </div>
+                    </div>
+                    <br></br>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <label class="control-label" for="imAssignment">Assignment Group</label>
+                            <h:selectOneMenu id="imAssignment"
+                                             value="#{alarmListController.troubleTicketsIntegrator.selected.ttAssignmentGroup}"
+                                             styleClass="form-control"
+                                             class="form-control"
+                                             required="true"
+                                             requiredMessage="Assignment can't be empty">
+                                <f:selectItem itemLabel="" itemValue="#{null}"/>
+                                <f:selectItems value="#{assignmentGroupsController.itemsAvailableSelectOne}" 
+                                               var="assignmentItem"
+                                               itemValue="#{assignmentItem}"
+                                               itemLabel="#{assignmentItem.groupName}"/>
+                            </h:selectOneMenu>
+                        </div>
+                    </div>
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <p:commandButton class="btn btn-block btn-success" actionListener="#{alarmListController.createTT}" 
+                                             value="Open TT"
+                                             update=":activeAlarmsForm:userTabs,:activeAlarmsForm:growl,:actionsForm:alarmDetails" 
+                                             oncomplete="handleSubmit(args, 'openTTDlg');"/>
+                          
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                             <p:commandButton class="btn btn-block btn-warning" value="Cancel" onclick="openTTDlg.hide()"/>
+                        </div>
+                    </div>
+
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+    
+    </ui:composition>
+</html>
+

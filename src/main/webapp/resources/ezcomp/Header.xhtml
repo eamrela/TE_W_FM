@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:cc="http://xmlns.jcp.org/jsf/composite">
+
+    <!-- INTERFACE -->
+    <cc:interface>
+        <cc:attribute name="pageName" required="true"/>
+        <cc:attribute name="pageDescription" required="true"/>
+    </cc:interface>
+
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+        <div class="col-lg-4 ">
+            <div class="main-header">
+                <h2>#{cc.attrs.pageName}</h2>
+                <em>#{cc.attrs.pageDescription}</em>
+            </div>
+        </div>
+    </cc:implementation>
+</html>

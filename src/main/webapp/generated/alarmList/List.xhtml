@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle2.ListAlarmListTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="AlarmListListForm">
+                <p:panel header="#{bundle2.ListAlarmListTitle}">
+                    <p:dataTable id="datalist" value="#{alarmListController.items}" var="item"
+                                 selectionMode="single" selection="#{alarmListController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.recordId}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle2.ListAlarmListTitle_alarmId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.alarmId}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle2.ListAlarmListTitle_recordId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.recordId}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle2.ListAlarmListTitle_acknowledged}"/>
+                            </f:facet>
+                            <p:selectBooleanCheckbox value="#{item.acknowledged}" disabled="true"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle2.ListAlarmListTitle_additionalText}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.additionalText}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle2.ListAlarmListTitle_alarmType}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.alarmType}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle2.ListAlarmListTitle_alarmDomain}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.alarmDomain}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle2.ListAlarmListTitle_managedObject}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.managedObject}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle2.ListAlarmListTitle_alarmNode}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.alarmNode}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle2.ListAlarmListTitle_alarmSeverity}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.alarmSeverity}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle2.ListAlarmListTitle_specificProblem}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.specificProblem}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle2.ListAlarmListTitle_eventTime}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.eventTime}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle2.ListAlarmListTitle_ceaseTime}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.ceaseTime}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle2.ListAlarmListTitle_acknowledgeTime}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.acknowledgeTime}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle2.ListAlarmListTitle_alarmComment}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.alarmComment}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle2.ListAlarmListTitle_serviceAffecting}"/>
+                            </f:facet>
+                            <p:selectBooleanCheckbox value="#{item.serviceAffecting}" disabled="true"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle2.ListAlarmListTitle_probableCause}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.probableCause}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle2.ListAlarmListTitle_loggingTime}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.loggingTime}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle2.ListAlarmListTitle_ttId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.ttId}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle2.ListAlarmListTitle_alarmOc}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.alarmOc}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle2.ListAlarmListTitle_acknowledgedBy}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.acknowledgedBy}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle2.ListAlarmListTitle_commentBy}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.commentBy}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle2.ListAlarmListTitle_ttBy}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.ttBy}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle2.Create}" actionListener="#{alarmListController.prepareCreate}" update=":AlarmListCreateForm" oncomplete="PF('AlarmListCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle2.View}" update=":AlarmListViewForm" oncomplete="PF('AlarmListViewDialog').show()" disabled="#{empty alarmListController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle2.Edit}" update=":AlarmListEditForm" oncomplete="PF('AlarmListEditDialog').show()" disabled="#{empty alarmListController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle2.Delete}" actionListener="#{alarmListController.destroy}" update=":growl,datalist" disabled="#{empty alarmListController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>
